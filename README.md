@@ -1,3 +1,4 @@
+
 # Sono services
 
 Benny - Identity 👮‍♂️
@@ -25,3 +26,7 @@ pip freeze > requirements.txt
 ```
 pip install -r requirements.txt
 ```
+
+Selena - Document Sync 🧚🏻‍♀️
+---
+Selena keeps everyone in the loop. Her main focus is to keep everyone updated with the latest documents. Selena makes sure you don't miss the latest updates.
