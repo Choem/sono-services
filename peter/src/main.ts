@@ -10,9 +10,8 @@ import { createApp } from './app';
 async function bootstrap() {
   const app = await createApp();
 
-  console.log(process.env);
-
   await app.listen(Config.getInt('APP_PORT'));
+  await app.startAllMicroservicesAsync();
 
   process.on('SIGTERM', async () => {
     await shutdownApp(app);
