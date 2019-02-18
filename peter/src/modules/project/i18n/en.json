@@ -1,0 +1,4 @@
+{
+  "project.create.success": "Project successfully created.",
+  "project.alreadyExists": "Project with name '%s' already exists."
+}
