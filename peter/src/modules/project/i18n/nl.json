@@ -1,0 +1,4 @@
+{
+  "project.create.success": "Project aangemaakt.",
+  "project.alreadyExists": "Project met naam '%s' bestaat al."
+}
