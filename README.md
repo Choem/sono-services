@@ -1,5 +1,6 @@
 
 
+
 # Sono services
 
 Benny - Identity Server 👮‍♂️
@@ -35,3 +36,7 @@ Selena keeps everyone in the loop. Her main focus is to keep everyone updated wi
 Alfred - Action Handler 🤹🏻‍♂️
 ---
 Alfred is a very busy Sono family member. He makes sure all actions are handled accordingly. Alfred is like a big hub of letters that get sorted to the right destination.
+
+Peter - Project Manager 👨🏻‍💼
+---
+Peter is quite the guy, he has to manage everyone's amazing music projects. We can't have Peter forget about someone's precious music, that would be a disaster. But don't worry Peter got this.
