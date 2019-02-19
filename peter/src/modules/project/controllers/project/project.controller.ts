@@ -12,6 +12,7 @@ import { ProjectService } from '../../services/project/project.service';
 import { BaseController } from '../../../../common/baseController';
 import { ProjectCreateDto } from '../../dtos/projectCreateDto';
 import { ApiResponse, ApiOperation, ApiUseTags } from '@nestjs/swagger';
+import { GrpcMethod } from '@nestjs/microservices';
 
 @Controller()
 @ApiUseTags('projects')
@@ -48,5 +49,15 @@ export class ProjectController extends BaseController {
   public async create(@Body() userCreateDto: ProjectCreateDto) {
     await this.projectService.create(userCreateDto);
     return this.api(true, { label: 'project.create.success' });
+  }
+
+  @GrpcMethod('ProjectService')
+  async findOne(data: { id: number }) {
+    return await this.projectService.findById(data.id);
+  }
+
+  @GrpcMethod('ProjectService')
+  async findAll() {
+    return { projects: (await this.projectService.getAll())[0] };
   }
 }

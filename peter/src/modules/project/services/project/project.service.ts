@@ -31,6 +31,10 @@ export class ProjectService {
     return this.projectRepository.insert(project);
   }
 
+  async findById(id: number){
+    return this.projectRepository.findOne(id);
+  }
+
   async getAll(
     pageSize: number = 10,
     page: number = 0
