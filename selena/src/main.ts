@@ -6,15 +6,11 @@ import { Config } from './utils/Config';
 
 dotenv.config();
 
-import { grpcClientOptions } from './gprc.options';
+// needs to be imported after dotenv config
+import { createApp } from './app';
 
 async function bootstrap() {
-  const fastifyAdapter = new FastifyAdapter({trustProxy: true});
-  const app = await NestFactory.create(AppModule, fastifyAdapter, {cors: true});
-  app.useWebSocketAdapter(new WsAdapter(app));
-
-  app.connectMicroservice(grpcClientOptions);
-
+  const app = await createApp();
   await app.listen(Config.getInt('APP_PORT'), Config.getString('APP_HOST'));
   await app.startAllMicroservicesAsync();
 

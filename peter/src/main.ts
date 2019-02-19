@@ -6,9 +6,9 @@ import * as fs from 'fs';
 
 dotenv.config();
 
-if(Config.getString('ENVIRONMENT') === 'development'){
+if (Config.getString('ENVIRONMENT') === 'development') {
   const devenv = dotenv.parse(fs.readFileSync(path.join(__dirname, '../../shared/.env.development')));
-  for (let k in devenv) {
+  for (const k in devenv) {
     process.env[k] = devenv[k];
   }
 }
