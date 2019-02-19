@@ -1,0 +1,18 @@
+syntax = "proto3";
+package sono;
+
+service DocumentService {
+  rpc CreateDoc (ProjectId) returns (CreateDocResponse) {}
+}
+
+message ProjectId {
+  int32 id = 1;
+}
+
+message CreateDocResponse {
+	bool success = 1;
+}
+
+message Empty {
+
+}

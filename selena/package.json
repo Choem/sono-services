@@ -20,14 +20,21 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
+    "@grpc/proto-loader": "^0.4.0",
     "@nestjs/common": "^5.4.0",
     "@nestjs/core": "^5.4.0",
+    "@nestjs/microservices": "^5.7.2",
     "@nestjs/websockets": "^5.7.2",
+    "dotenv": "^6.2.0",
+    "fastify": "^1.14.1",
+    "fastify-formbody": "^2.1.0",
+    "grpc": "^1.18.0",
     "reflect-metadata": "^0.1.12",
     "rimraf": "^2.6.2",
     "rxjs": "^6.2.2",
     "sharedb": "^1.0.0-beta.19",
     "sharedb-mongo": "^1.0.0-beta.8",
+    "start": "^5.1.0",
     "typescript": "^3.0.1",
     "websocket-json-stream": "0.0.3"
   },
