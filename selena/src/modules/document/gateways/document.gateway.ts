@@ -8,7 +8,7 @@ import { DocumentService } from '../services/document.service';
 import * as WebSocketJsonStream from 'websocket-json-stream';
 
 @WebSocketGateway()
-export class DocumentGateway implements OnGatewayConnection{
+export class DocumentGateway implements OnGatewayConnection {
   constructor(private readonly documentService: DocumentService) {}
 
   @WebSocketServer() server;
