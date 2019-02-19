@@ -22,5 +22,7 @@ RUN npm install --production
 
 # Show current folder structure in logs
 # RUN ls -al -R
+EXPOSE 3333
+EXPOSE 50051
 
 CMD [ "pm2-runtime", "start", "pm2.json" ]

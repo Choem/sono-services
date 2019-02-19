@@ -5,7 +5,8 @@
   "author": "",
   "license": "MIT",
   "scripts": {
-    "build": "rimraf dist && tsc -p tsconfig.build.json && copyfiles -u 1 ./src/**/*.{json,hbs} dist/ && copyfiles .env.template dist/ && copyfiles -u 1 ./src/**/*.proto dist/",
+    "build": "rimraf dist && tsc -p tsconfig.build.json && copyfiles -u 1 ./src/**/*.{json,hbs} dist/ && copyfiles .env.template dist/ && copyfiles -u 1 ./../shared/**/* dist/",
+    "docker:build": "docker build -t sono-peter .",
     "format": "prettier --write \"src/**/*.ts\"",
     "start": "ts-node -r tsconfig-paths/register src/main.ts",
     "start:dev": "nodemon",

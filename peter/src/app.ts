@@ -21,6 +21,7 @@ export async function createApp(): Promise<
   const options = new DocumentBuilder()
     .setTitle('Sono Project API')
     .setDescription('description...')
+    .setSchemes('https', 'http')
     .setVersion('1.0')
     .build();
 

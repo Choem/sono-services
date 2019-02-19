@@ -1,8 +1,8 @@
 syntax = "proto3";
-package project;
+package sono;
 
 service ProjectService {
-  rpc FindOne (ProjectById) returns (ProjectResponse) {}
+  rpc FindOne (ProjectById) returns (Project) {}
   rpc FindAll (Empty) returns (ProjectsResponse) {}
 }
 
@@ -10,13 +10,13 @@ message ProjectById {
   int32 id = 1;
 }
 
-message ProjectResponse {
+message Project {
   int32 id = 1;
   string name = 2;
 }
 
 message ProjectsResponse {
-  repeated ProjectResponse projects = 1;
+  repeated Project projects = 1;
 }
 
 message Empty {

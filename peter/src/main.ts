@@ -1,8 +1,17 @@
 import 'reflect-metadata';
 import { Config } from './utils/config';
 import * as dotenv from 'dotenv';
+import * as path from 'path';
+import * as fs from 'fs';
 
 dotenv.config();
+
+if(Config.getString('ENVIRONMENT') === 'development'){
+  const devenv = dotenv.parse(fs.readFileSync(path.join(__dirname, '../../shared/.env.development')));
+  for (let k in devenv) {
+    process.env[k] = devenv[k];
+  }
+}
 
 // needs to be imported after dotenv config
 import { createApp } from './app';
@@ -10,7 +19,7 @@ import { createApp } from './app';
 async function bootstrap() {
   const app = await createApp();
 
-  await app.listen(Config.getInt('APP_PORT'));
+  await app.listen(Config.getInt('APP_PORT'), '0.0.0.0');
   await app.startAllMicroservicesAsync();
 
   process.on('SIGTERM', async () => {
