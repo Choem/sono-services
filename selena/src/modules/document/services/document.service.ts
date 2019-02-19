@@ -1,6 +1,7 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import * as ShareDB from 'sharedb';
 import * as shareMongo from 'sharedb-mongo';
+import { Config } from '../../../utils/Config';
 
 @Injectable()
 export class DocumentService implements OnModuleInit {
@@ -11,7 +12,7 @@ export class DocumentService implements OnModuleInit {
   constructor(private logger: Logger) { }
 
   onModuleInit(): any {
-    this.db = shareMongo('mongodb://192.168.99.101:27017/selena');
+    this.db = shareMongo(Config.getString('MONGO_DB'));
     this.backend = new ShareDB({ db: this.db });
     this.connection = this.backend.connect();
   }
