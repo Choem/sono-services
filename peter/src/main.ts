@@ -19,7 +19,7 @@ import { createApp } from './app';
 async function bootstrap() {
   const app = await createApp();
 
-  await app.listen(Config.getInt('APP_PORT'), '0.0.0.0');
+  await app.listen(Config.getInt('APP_PORT'), Config.getString('APP_HOST'));
   await app.startAllMicroservicesAsync();
 
   process.on('SIGTERM', async () => {
