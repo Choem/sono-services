@@ -27,7 +27,7 @@ class Database:
         session.remove()
 
 # Class that serves as a middleware database provider
-class DatabaseMiddleWare:
+class DatabaseMiddleware:
 
     # Constructor which intializes the database class
     def __init__(self):

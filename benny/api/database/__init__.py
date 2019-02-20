@@ -1,1 +1,1 @@
-from .database import Database, DatabaseMiddleWare
+from .database import Database, DatabaseMiddleware
