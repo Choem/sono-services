@@ -4,6 +4,8 @@ import falcon
 from api.database import DatabaseMiddleware
 from api.auth import AuthMiddleware
 from api.router import Router
+
+from api.resources.auth.routes import routes as auth_routes
 from api.resources.users.routes import routes as users_routes 
 
 # Method for intializing the application
@@ -17,6 +19,7 @@ def init_api():
 
     # Register routes from the resources we have
     Router.register_routes([
+        auth_routes,
         users_routes
     ], api)
 
