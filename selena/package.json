@@ -5,7 +5,7 @@
   "author": "SonoStudio",
   "license": "MIT",
   "scripts": {
-    "build": "tsc -p tsconfig.build.json",
+    "build": "rimraf dist  && tsc -p tsconfig.build.json && copyfiles -u 1 ./src/**/*.{json,hbs} dist/ && copyfiles .env.template dist/ && copy ./../shared dist/shared",
     "format": "prettier --write \"src/**/*.ts\"",
     "start": "ts-node -r tsconfig-paths/register src/main.ts",
     "start:dev": "nodemon",
@@ -25,6 +25,8 @@
     "@nestjs/core": "^5.4.0",
     "@nestjs/microservices": "^5.7.2",
     "@nestjs/websockets": "^5.7.2",
+    "copy": "^0.3.2",
+    "copyfiles": "^2.1.0",
     "dotenv": "^6.2.0",
     "fastify": "^1.14.1",
     "fastify-formbody": "^2.1.0",
