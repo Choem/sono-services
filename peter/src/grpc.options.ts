@@ -9,6 +9,8 @@ if(Config.getString('ENVIRONMENT') !== 'development') {
   protoPath = join(__dirname, '..', 'shared', 'protos', 'peter.proto');
   loaderDir = join(__dirname, '..', 'shared', 'protos', '**/*.proto');
 }
+const protoPath = join(__dirname, '..', '..', 'shared', 'protos', 'peter.proto');
+const loaderDir = join(__dirname, '..', '..', 'shared', 'protos', '**/*.proto');
 
 export const grpcClientOptions: ClientOptions = {
   transport: Transport.GRPC,
