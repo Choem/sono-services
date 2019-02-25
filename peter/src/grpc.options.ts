@@ -2,8 +2,8 @@ import { Transport, ClientOptions } from '@nestjs/microservices';
 import { join } from 'path';
 import { Config } from './utils/config';
 
-let protoPath = join(__dirname, '..', '..', 'shared', 'protos', 'peter.proto');
-let loaderDir = join(__dirname, '..', '..', 'shared', 'protos', '**/*.proto');
+const protoPath = join(__dirname, '..', '..', 'shared', 'protos', 'peter_service', 'peter_service.proto');
+const loaderDir = join(__dirname, '..', '..', 'shared', 'protos', '**/*.proto');
 
 if(Config.getString('ENVIRONMENT') !== 'development') {
   protoPath = join(__dirname, '..', 'shared', 'protos', 'peter.proto');
@@ -15,9 +15,9 @@ export const grpcClientOptions: ClientOptions = {
   options: {
     url: `${Config.getString('APP_HOST')}:${Config.getString('GRPC_PORT')}`,
     package: 'sono',
-    protoPath: protoPath,
+    protoPath,
     loader: {
       includeDirs: [loaderDir],
-    }
+    },
   },
 };

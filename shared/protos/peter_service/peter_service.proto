@@ -1,9 +1,11 @@
 syntax = "proto3";
 package sono;
 
+import "../common/empty.proto";
+
 service ProjectService {
   rpc FindOne (ProjectById) returns (Project) {}
-  rpc FindAll (Empty) returns (ProjectsResponse) {}
+  rpc FindAll (Empty) returns (Projects) {}
 }
 
 message ProjectById {
@@ -15,10 +17,6 @@ message Project {
   string name = 2;
 }
 
-message ProjectsResponse {
+message Projects {
   repeated Project projects = 1;
-}
-
-message Empty {
-
 }
