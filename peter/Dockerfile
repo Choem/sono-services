@@ -7,8 +7,8 @@ COPY package.json .
 COPY pm2.json .
 
 # Install app dependencies
-ENV NPM_CONFIG_LOGLEVEL warn
-RUN npm install --production
+RUN npm install typeorm --no-bin-links
+RUN npm install
 
 # Show current folder structure in logs
 EXPOSE 3333

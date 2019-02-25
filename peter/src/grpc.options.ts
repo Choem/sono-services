@@ -2,11 +2,11 @@ import { Transport, ClientOptions } from '@nestjs/microservices';
 import { join } from 'path';
 import { Config } from './utils/config';
 
-const protoPath = join(__dirname, '..', '..', 'shared', 'protos', 'peter_service', 'peter_service.proto');
-const loaderDir = join(__dirname, '..', '..', 'shared', 'protos', '**/*.proto');
+let protoPath = join(__dirname, '..', '..', 'shared', 'protos', 'peter_service', 'peter_service.proto');
+let loaderDir = join(__dirname, '..', '..', 'shared', 'protos', '**/*.proto');
 
-if(Config.getString('ENVIRONMENT') !== 'development') {
-  protoPath = join(__dirname, '..', 'shared', 'protos', 'peter.proto');
+if (Config.getString('ENVIRONMENT') !== 'development') {
+  protoPath = join(__dirname, '..', 'shared', 'protos', 'peter_service', 'peter_service.proto');
   loaderDir = join(__dirname, '..', 'shared', 'protos', '**/*.proto');
 }
 
