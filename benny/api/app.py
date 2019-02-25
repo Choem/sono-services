@@ -1,8 +1,12 @@
 import os
 import falcon
 
+# kanker
+from falcon_auth import FalconAuthMiddleware, JWTAuthBackend
+from api.config import Config 
+
 from api.database import DatabaseMiddleware
-from api.auth import AuthMiddleware
+from api.auth import AuthMiddleware, Auth
 from api.router import Router
 
 from api.resources.auth.routes import routes as auth_routes

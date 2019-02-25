@@ -3,7 +3,6 @@ from sqlalchemy import create_engine, orm
 # Class that holds the engine and current session
 class Database:
 
-    # TODO: connection string via config
     # Constructor with the connection string
     def __init__(self):
         self.engine = create_engine('mysql+pymysql://root:piraatkat@127.0.0.1/benny')
@@ -14,7 +13,7 @@ class Database:
         sessionmaker = orm.sessionmaker(
             bind=self.engine,
             autoflush=True,
-            autocommit=True,
+            autocommit=False,
             expire_on_commit=True
         )
         self.session = orm.scoped_session(sessionmaker)
@@ -36,9 +35,9 @@ class DatabaseMiddleware:
     # Process the request after routing it
     def process_resource(self, request, response, resource, params):
         self.database.connect()
-        resource.session = self.database.session
+        request.context['session'] = self.database.session
 
     # Post processing of the response after routing it
     def process_response(self, request, response, resource, params):
-        if hasattr(resource, 'session'):
-            self.database.close(resource.session)
+        if hasattr(request.context, 'session'):
+            self.database.close(request.context['session'])

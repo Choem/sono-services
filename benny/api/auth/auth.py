@@ -13,23 +13,17 @@ class Auth:
         )
         self._auth_middleware = FalconAuthMiddleware(
             self.auth_backend,
-            exempt_routes=None,
-            exempt_methods=['HEAD'],
+            exempt_routes=['/auth/register', '/auth/login'],
+            exempt_methods=None,
         )
 
     @property
     def auth_middleware(self):
-        return self.auth_middleware
+        return self._auth_middleware
 
 class AuthMiddleware:
     def __init__(self):
         self.auth = Auth()
 
-    def __repr__(self):
-        return repr(self.auth.auth_middleware)
-
     def process_resource(self, request, response, resource, params):
-        print('Process resource auth')
-
-    def process_response(self, request, response, resource, params):
-        print('Process response auth')
+        self.auth.auth_middleware.process_resource(request, response, resource, params)
