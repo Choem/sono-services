@@ -1,6 +1,8 @@
 syntax = "proto3";
 package sono;
 
+import "../common/empty.proto";
+
 service DocumentService {
   rpc CreateDoc (ProjectId) returns (CreateDocResponse) {}
 }
@@ -11,8 +13,4 @@ message ProjectId {
 
 message CreateDocResponse {
 	bool success = 1;
-}
-
-message Empty {
-
 }

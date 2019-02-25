@@ -1,6 +1,6 @@
 import { Transport, ClientOptions } from '@nestjs/microservices';
 import { join } from 'path';
-import { Config } from './utils/config';
+import { Config } from './utils/Config';
 
 const protoPath = join(__dirname, '..', '..', 'shared', 'protos', 'selena.proto');
 const loaderDir = join(__dirname, '..', '..', 'shared', 'protos', '**/*.proto');
