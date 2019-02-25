@@ -2,7 +2,7 @@ import { FastifyAdapter, NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { WsAdapter } from '@nestjs/websockets';
 import * as dotenv from 'dotenv';
-import { Config } from './utils/Config';
+import { Config } from './utils/config';
 
 dotenv.config();
 

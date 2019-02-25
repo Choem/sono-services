@@ -1,7 +1,7 @@
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 import * as ShareDB from 'sharedb';
 import * as shareMongo from 'sharedb-mongo';
-import { Config } from '../../../utils/Config';
+import { Config } from '../../../utils/config';
 
 @Injectable()
 export class DocumentService implements OnModuleInit {

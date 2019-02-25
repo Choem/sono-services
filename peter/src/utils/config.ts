@@ -1,4 +1,5 @@
 import * as path from 'path';
+import { join } from 'path';
 
 export class Config {
   public static getBool(name: string): boolean {
@@ -15,6 +16,13 @@ export class Config {
 
   public static get isProduction(): boolean {
     return this.getBool('PRODUCTION');
+  }
+
+  public static getProtoPath(...filePath: string[]) {
+    if (Config.getString('ENVIRONMENT') !== 'development') {
+      return join(__dirname, '..', '..', 'shared', 'protos', ...filePath);
+    }
+    return join(__dirname, '..', '..', '..', 'shared', 'protos', ...filePath);
   }
 
   public static get appRoot(): string {

@@ -10,9 +10,6 @@ export class ProjectEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({name: 'document_id', nullable: true})
-  documentId: string;
-
   @Column({name: 'user_id'})
   userId: number;
 

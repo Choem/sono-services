@@ -25,7 +25,7 @@
     "@nestjs/core": "^5.4.0",
     "@nestjs/microservices": "^5.7.2",
     "@nestjs/websockets": "^5.7.2",
-    "copy": "^0.3.2",
+    "copy-dir-cli": "^0.0.3",
     "copyfiles": "^2.1.0",
     "dotenv": "^6.2.0",
     "fastify": "^1.14.1",
