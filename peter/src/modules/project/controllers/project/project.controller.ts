@@ -1,12 +1,10 @@
 import {
   Body,
   Controller,
-  Delete,
   Get,
   HttpStatus,
-  Param,
   Post,
-  Put, Query,
+  Query,
 } from '@nestjs/common';
 import { ProjectService } from '../../services/project/project.service';
 import { BaseController } from '../../../../common/baseController';
