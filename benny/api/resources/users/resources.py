@@ -1,6 +1,9 @@
 import falcon
 
-class Users(object):
+from api.models import User
+from api.resources.base import BaseResource
+
+class UsersResource(BaseResource):
     auth = {
         'auth_disabled': True
     }
@@ -8,15 +11,25 @@ class Users(object):
     def on_get(self, request, response):
         session = request.context['session']
 
-        users = session.query(User).all()
+        users = [user.as_dict() for user in session.query(User).all()]
 
-        response.status = falcon.HTTP_200
-        response.body = users
+        self.on_success(response, 'Users returned', { 'users': users })
 
-class User(object):
+
+class UserResource(BaseResource):
+    auth = {
+        'auth_disabled': True
+    }
+    
     def on_get(self, request, response, id):
-        response.status = falcon.HTTP_200
-        response.body = ('User returned')
+        session = request.context['session']
+
+        user = session.query(User).filter_by(id=id).one_or_none()
+
+        if not user:
+            self.on_error(response, { 'message': 'User not found', 'code': 400, 'status': 'Bad Request' })
+        else:
+            self.on_success(response, 'User returned', user.as_dict())
 
     def on_put(self, request, response, id):
         response.status = falcon.HTTP_200
@@ -26,7 +39,18 @@ class User(object):
         response.status = falcon.HTTP_200
         response.body = ('User deleted')
 
-class FindByEmail(object):
+
+class FindByEmailResource(BaseResource):
+    auth = {
+        'auth_disabled': True
+    }
+
     def on_get(self, request, response, email):
-        response.status = falcon.HTTP_200
-        response.body = ('User returned')
+        session = request.context['session']
+
+        user = session.query(User).filter_by(email=email).one_or_none()
+
+        if not user:
+            self.on_error(response, { 'message': 'User not found', 'code': 400, 'status': 'Bad Request' })
+        else:
+            self.on_success(response, 'User returned', user.as_dict())

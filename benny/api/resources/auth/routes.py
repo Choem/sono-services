@@ -1,6 +1,6 @@
-from .resources import Register, Login
+from .resources import RegisterResource, LoginResource
 
 routes = [
-    ('/auth/register', Register()),
-    ('/auth/login', Login())
+    ('/auth/register', RegisterResource()),
+    ('/auth/login', LoginResource())
 ]

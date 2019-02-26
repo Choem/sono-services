@@ -51,7 +51,7 @@ def validate_register_fields(request, response, resource, params):
         raise InvalidParameterError('Invalid Request {0}'.format(request.context))
 
 
-class Register(BaseResource):
+class RegisterResource(BaseResource):
     @falcon.before(validate_register_fields)
     def on_post(self, request, response):
         session = request.context['session']
@@ -107,7 +107,7 @@ def validate_login_fields(request, response, resource, params):
         raise InvalidParameterError('Invalid Request {0}'.format(request.context))
 
 
-class Login(BaseResource):
+class LoginResource(BaseResource):
     @falcon.before(validate_login_fields)
     def on_post(self, request, response):
         session = request.context['session']

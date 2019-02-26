@@ -12,3 +12,6 @@ class User(Base):
 
     def __repr__(self):
         return "<User(id='{0}', username='{1}', email='{2}')>".format(self.id, self.username, self.email)
+
+    def as_dict(self):
+       return {c.name: getattr(self, c.name) for c in self.__table__.columns}

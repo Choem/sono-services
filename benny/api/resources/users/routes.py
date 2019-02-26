@@ -1,7 +1,7 @@
-from .resources import Users, User, FindByEmail
+from .resources import UsersResource, UserResource, FindByEmailResource
 
 routes = [
-    ('/users', Users()),
-    ('/users/{id:int}', User()),
-    ('/users/email/{email}',  FindByEmail())
+    ('/users', UsersResource()),
+    ('/users/{id:int}', UserResource()),
+    ('/users/email/{email}',  FindByEmailResource())
 ]
