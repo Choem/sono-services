@@ -4,11 +4,12 @@ package sono;
 import "../common/empty.proto";
 
 service DocumentService {
-  rpc CreateDoc (ProjectId) returns (CreateDocResponse) {}
+  rpc CreateDoc (ProjectData) returns (CreateDocResponse) {}
 }
 
-message ProjectId {
+message ProjectData {
   int32 id = 1;
+  string songdata = 2;
 }
 
 message CreateDocResponse {
