@@ -17,11 +17,13 @@ export class DocumentService implements OnModuleInit {
     this.connection = this.backend.connect();
   }
 
-  createDoc(projectId: number) {
+  createDoc(projectId: number, song: string) {
     const doc = this.connection.get('selena', projectId.toString());
     doc.fetch(res => {
       if (doc.type == null) {
-        doc.create({});
+        const test = JSON.parse(song);
+        console.log(test);
+        doc.create(test);
       }
     });
   }
