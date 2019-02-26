@@ -21,9 +21,8 @@ export class DocumentService implements OnModuleInit {
     const doc = this.connection.get('selena', projectId.toString());
     doc.fetch(res => {
       if (doc.type == null) {
-        const test = JSON.parse(song);
-        console.log(test);
-        doc.create(test);
+        const jsonSongData = JSON.parse(song);
+        doc.create(jsonSongData);
       }
     });
   }
