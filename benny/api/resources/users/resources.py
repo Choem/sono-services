@@ -1,10 +1,17 @@
 import falcon
 
 class Users(object):
+    auth = {
+        'auth_disabled': True
+    }
+
     def on_get(self, request, response):
-        print(request.context)
+        session = request.context['session']
+
+        users = session.query(User).all()
+
         response.status = falcon.HTTP_200
-        response.body = ('Collection of users')
+        response.body = users
 
 class User(object):
     def on_get(self, request, response, id):

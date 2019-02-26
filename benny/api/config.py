@@ -11,7 +11,7 @@ class Config:
         self._read_file(local_env_path)        
 
         # Read file from shared .env path if dev is True
-        shared_env_path = './../../shared/.env.development'
+        shared_env_path = '../../shared/.env.development'
         if self._rules['DEVELOPMENT'] in 'True':
                 self._read_file(shared_env_path, False)
         
@@ -32,7 +32,7 @@ class Config:
         else:
             # How strict you want to be when finding a file
             if strict:
-                raise FileNotFoundError('This file was not found %s' % path)
+                raise FileNotFoundError('This file was not found {0}'.format(path))
 
     @property
     def rules(self):

@@ -18,6 +18,12 @@ ERR_INVALID_PARAMETER = {
     'title': 'Invalid Parameter'
 }
 
+ERR_USER_NOT_EXISTS = {
+    'status': falcon.HTTP_404,
+    'code': 400,
+    'title': 'User Does Not Exists'
+}
+
 ERR_PASSWORD_NOT_MATCH = {
     'status': falcon.HTTP_400,
     'code': 400,
@@ -68,6 +74,12 @@ class UnkownError(ApiError):
 class InvalidParameterError(ApiError):
     def __init__(self, description=None):
         super().__init__(ERR_INVALID_PARAMETER)
+        self.error['description'] = description
+
+
+class UserNotExistsError(ApiError):
+    def __init__(self, description=None):
+        super().__init__(ERR_USER_NOT_EXISTS)
         self.error['description'] = description
 
 

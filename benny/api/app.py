@@ -1,13 +1,12 @@
 import os
 import falcon
 
-# kanker
-from falcon_auth import FalconAuthMiddleware, JWTAuthBackend
 from api.config import Config 
-
-from api.database import DatabaseMiddleware
-from api.auth import AuthMiddleware, Auth
 from api.router import Router
+
+from api.middleware.database import DatabaseMiddleware
+from api.middleware.auth import AuthMiddleware, Auth
+from api.middleware.translator import TranslatorMiddleware
 
 from api.resources.auth.routes import routes as auth_routes
 from api.resources.users.routes import routes as users_routes 
@@ -15,9 +14,10 @@ from api.resources.users.routes import routes as users_routes
 # Method for intializing the application
 def init_api(config):
 
-    # Create a falcon API with our own database middleware
+    # Create a falcon API with our own middlewares
     api = falcon.API(middleware=[
         AuthMiddleware(config),
+        TranslatorMiddleware(),
         DatabaseMiddleware(config)
     ])
 
