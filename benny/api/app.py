@@ -13,12 +13,12 @@ from api.resources.auth.routes import routes as auth_routes
 from api.resources.users.routes import routes as users_routes 
 
 # Method for intializing the application
-def init_api():
+def init_api(config):
 
     # Create a falcon API with our own database middleware
     api = falcon.API(middleware=[
-        AuthMiddleware(),
-        DatabaseMiddleware()
+        AuthMiddleware(config),
+        DatabaseMiddleware(config)
     ])
 
     # Register routes from the resources we have
@@ -29,5 +29,8 @@ def init_api():
 
     return api
 
+# Config which holds the env file as key value pairs in rules dict
+config = Config()
+
 # Api holds the initialized falcon API
-api = init_api()
+api = init_api(config)

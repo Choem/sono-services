@@ -4,8 +4,13 @@ from sqlalchemy import create_engine, orm
 class Database:
 
     # Constructor with the connection string
-    def __init__(self):
-        self.engine = create_engine('mysql+pymysql://root:piraatkat@127.0.0.1/benny')
+    def __init__(self, config):
+        self.engine = create_engine('mysql+pymysql://{0}:{1}@{2}/{3}'.format(
+            config.rules['DB_USER_NAME'], 
+            config.rules['DB_USER_PASSWORD'], 
+            config.rules['DB_HOST'],
+            config.rules['DB_NAME']
+        ))
         self.session = None
 
     # Create a new session
@@ -29,8 +34,8 @@ class Database:
 class DatabaseMiddleware:
 
     # Constructor which intializes the database class
-    def __init__(self):
-        self.database = Database()
+    def __init__(self, config):
+        self.database = Database(config)
 
     # Process the request after routing it
     def process_resource(self, request, response, resource, params):

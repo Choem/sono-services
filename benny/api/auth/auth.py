@@ -3,13 +3,13 @@ from api.config import Config
 from falcon_auth import FalconAuthMiddleware, JWTAuthBackend
 
 class Auth:
-    def __init__(self):
+    def __init__(self, config):
         self.user_loader = lambda email, password: { 'email', email }
         self.auth_backend = JWTAuthBackend(
             self.user_loader, 
             algorithm='HS256',
-            secret_key=Config.JWT_SECRET, 
-            auth_header_prefix='Bearer '
+            secret_key=config.rules['JWT_SECRET'], 
+            auth_header_prefix=config.rules['JWT_HEADER_PREFIX']
         )
         self._auth_middleware = FalconAuthMiddleware(
             self.auth_backend,
@@ -22,8 +22,8 @@ class Auth:
         return self._auth_middleware
 
 class AuthMiddleware:
-    def __init__(self):
-        self.auth = Auth()
+    def __init__(self, config):
+        self.auth = Auth(config)
 
     def process_resource(self, request, response, resource, params):
         self.auth.auth_middleware.process_resource(request, response, resource, params)
