@@ -1,3 +1,5 @@
+import json
+
 from api.config import Config
 
 from falcon_auth import FalconAuthMiddleware, JWTAuthBackend
@@ -13,8 +15,8 @@ class Auth:
         )
         self._auth_middleware = FalconAuthMiddleware(
             self._auth_backend,
-            exempt_routes=['/auth/register', '/auth/login', '/swagger'],
-            exempt_methods=None,
+            exempt_routes=['/auth/register', '/auth/login'],
+            exempt_methods=None
         )
 
     @property
@@ -31,4 +33,5 @@ class AuthMiddleware:
 
     def process_resource(self, request, response, resource, params):
         request.context['auth'] = self.auth.auth_backend
+        print(json.dumps(request.headers))
         self.auth.auth_middleware.process_resource(request, response, resource, params)
