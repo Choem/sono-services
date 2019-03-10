@@ -13,7 +13,7 @@ class Auth:
         )
         self._auth_middleware = FalconAuthMiddleware(
             self._auth_backend,
-            exempt_routes=['/auth/register', '/auth/login'],
+            exempt_routes=['/auth/register', '/auth/login', '/swagger'],
             exempt_methods=None,
         )
 
