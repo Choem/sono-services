@@ -1,15 +1,17 @@
+import os
+
 from sqlalchemy import create_engine, orm
 
 # Class that holds the engine and current session
 class Database:
 
     # Constructor with the connection string
-    def __init__(self, config):
+    def __init__(self):
         self.engine = create_engine('mysql+pymysql://{0}:{1}@{2}/{3}'.format(
-            config.rules['DB_USER_NAME'], 
-            config.rules['DB_USER_PASSWORD'], 
-            config.rules['DB_HOST'],
-            config.rules['DB_NAME']
+            os.environ.get('DB_USER_NAME'), 
+            os.environ.get('DB_USER_PASSWORD'), 
+            os.environ.get('DB_HOST'),
+            os.environ.get('DB_NAME')
         ))
         self.session = None
 
@@ -34,8 +36,8 @@ class Database:
 class DatabaseMiddleware:
 
     # Constructor which intializes the database class
-    def __init__(self, config):
-        self.database = Database(config)
+    def __init__(self):
+        self.database = Database()
 
     # Process the request after routing it
     def process_resource(self, request, response, resource, params):

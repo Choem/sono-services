@@ -48,12 +48,14 @@ class UserResource(BaseResource):
         session = request.context['session']
 
         user = session.query(User).filter_by(id=id).one_or_none()
-        del user['password']
 
         if not user:
             self.on_error(response, { 'message': 'User not found', 'code': 400, 'status': 'Bad Request' })
         else:
-            self.on_success(response, 'User returned', { 'id': user.id, 'username': user.username, 'email': user.email })
+            user = user.as_dict()
+            del user['password']
+
+            self.on_success(response, 'User returned', user)
 
     @falcon.before(validate_update_fields)
     def on_put(self, request, response, id):
@@ -82,7 +84,6 @@ class UserResource(BaseResource):
 
 class FindByEmailResource(BaseResource):
     def on_get(self, request, response, email):
-        print(email)
         session = request.context['session']
 
         user = session.query(User).filter_by(email=email).one_or_none()
@@ -90,4 +91,7 @@ class FindByEmailResource(BaseResource):
         if not user:
             self.on_error(response, { 'message': 'User not found', 'code': 400, 'status': 'Bad Request' })
         else:
-            self.on_success(response, 'User returned', { 'id': user.id, 'username': user.username, 'email': user.email })
+            user = user.as_dict()
+            del user['password']
+
+            self.on_success(response, 'User returned', user)
