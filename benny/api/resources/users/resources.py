@@ -10,16 +10,12 @@ from api.common.errors import InvalidParameterError
 class UsersResource(BaseResource):
     def on_get(self, request, response):
         session = request.context['session']
+        # Get authenticated user (which only holds id)
+        # authenticated_user = request.context['user']
 
-        # TODO: Make DTO, del / delattr doesnt remove attr key on user object
-        # users = [user.as_dict() for user in session.query(User).all()]
-        users = []
-        for user in session.query(User).all():
-            users.append({
-                'id': user.id,
-                'username': user.username,
-                'email': user.email
-            })
+        users = [user.as_dict() for user in session.query(User).all()]
+        for user in users:
+            del user['password']
 
         self.on_success(response, 'Users returned', { 'users': users })
 
@@ -48,14 +44,11 @@ def validate_update_fields(request, response, resource, params):
 
 
 class UserResource(BaseResource):
-    auth = {
-        'auth_disabled': True
-    }
-    
     def on_get(self, request, response, id):
         session = request.context['session']
 
         user = session.query(User).filter_by(id=id).one_or_none()
+        del user['password']
 
         if not user:
             self.on_error(response, { 'message': 'User not found', 'code': 400, 'status': 'Bad Request' })
@@ -88,10 +81,6 @@ class UserResource(BaseResource):
 
 
 class FindByEmailResource(BaseResource):
-    auth = {
-        'auth_disabled': True
-    }
-
     def on_get(self, request, response, email):
         print(email)
         session = request.context['session']

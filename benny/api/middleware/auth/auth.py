@@ -1,12 +1,10 @@
-import json
-
 from api.config import Config
 
 from falcon_auth import FalconAuthMiddleware, JWTAuthBackend
 
 class Auth:
     def __init__(self, config):
-        self.user_loader = lambda email, password: { 'email', email }
+        self.user_loader = lambda payload: payload['user']
         self._auth_backend = JWTAuthBackend(
             self.user_loader, 
             algorithm='HS256',
@@ -33,5 +31,4 @@ class AuthMiddleware:
 
     def process_resource(self, request, response, resource, params):
         request.context['auth'] = self.auth.auth_backend
-        print(json.dumps(request.headers))
         self.auth.auth_middleware.process_resource(request, response, resource, params)
