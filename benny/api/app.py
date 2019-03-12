@@ -1,5 +1,7 @@
 import os
 import falcon
+import concurrent.futures
+import logging
 
 from alembic import command
 from alembic.config import Config as AlembicConfig
@@ -7,19 +9,17 @@ from alembic.config import Config as AlembicConfig
 from api.config import Config  as APIConfig
 from api.router import Router
 
-from api.middleware.database import DatabaseMiddleware
+from api.middleware.database import DatabaseMiddleware, Database
 from api.middleware.auth import AuthMiddleware, Auth
 from api.middleware.translator import TranslatorMiddleware
 
 from api.resources.auth.routes import routes as auth_routes
-from api.resources.users.routes import routes as users_routes 
+from api.resources.users.routes import routes as users_routes
+
+from benny_service.benny_service_server import AccountServiceServer, serve as ServeGRPC
 
 # Method for intializing the application
 def init_api():
-
-    # Initialize API config
-    APIConfig()
-
     # Connect to db and run migrations if needed
     alembic_config = AlembicConfig('alembic.ini')
     alembic_config.set_main_option('script_location', 'migrations')
@@ -47,5 +47,15 @@ def init_api():
     return api
 
 
-# Api holds the initialized falcon API
-api = init_api()
+def init_grpc():
+    logging.info('Starting gRPC server...')
+    ServeGRPC(Database())
+    logging.info('Booted gRPC server!')
+
+# Initialize API config
+APIConfig()
+
+# Execute API and gRPC in two different threads
+executor = concurrent.futures.ThreadPoolExecutor(max_workers=2)
+api = executor.submit(init_api).result()
+executor.submit(init_grpc)
