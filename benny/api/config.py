@@ -5,11 +5,11 @@ class Config:
     def __init__(self):
         # Read file from local .env path
         local_env_path = '.env'
-        self._read_file(local_env_path)        
+        self._read_file(local_env_path, False)        
 
         # Read file from shared .env path if dev is True
         shared_env_path = '../../shared/.env.development'
-        if os.environ.get('DEVELOPMENT') in 'True':
+        if os.environ.get('DEVELOPMENT', 'False') in 'True':
                 self._read_file(shared_env_path, False)
         
     def _read_file(self, path, strict=True):
