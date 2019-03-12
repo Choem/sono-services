@@ -4,6 +4,7 @@ import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 import { INestApplication, INestFastifyApplication } from '@nestjs/common';
 import { grpcClientOptions } from './grpc.options';
+import { Config } from './utils/config';
 
 
 export async function createApp(): Promise<
@@ -23,6 +24,7 @@ export async function createApp(): Promise<
     .setDescription('description...')
     .setSchemes('https', 'http')
     .setVersion('1.0')
+    .setBasePath(Config.getString('SWAGGER_BASE_PATH'))
     .build();
 
   const document = SwaggerModule.createDocument(app, options);
