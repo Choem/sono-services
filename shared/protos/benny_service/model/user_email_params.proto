@@ -1,0 +1,6 @@
+syntax = "proto3";
+package sono;
+
+message UserEmailParams {
+    string email = 1;
+}
