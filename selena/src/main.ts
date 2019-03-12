@@ -1,11 +1,18 @@
-import { NestFactory } from '@nestjs/core';
+import { FastifyAdapter, NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { WsAdapter } from '@nestjs/websockets';
+import * as dotenv from 'dotenv';
+import { Config } from './utils/config';
+
+dotenv.config();
+
+// needs to be imported after dotenv config
+import { createApp } from './app';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
-  app.useWebSocketAdapter(new WsAdapter(app.getHttpServer()));
-  await app.listen(3000);
+  const app = await createApp();
+  await app.listen(Config.getInt('APP_PORT'), Config.getString('APP_HOST'));
+  await app.startAllMicroservicesAsync();
 
   process.on('SIGTERM', async () => {
     await shutdown(app);

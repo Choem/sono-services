@@ -6,12 +6,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { TranslateInterceptor } from '../../common/interceptors/translate.interceptor';
 import * as path from 'path';
+import { SelenaService } from './services/selena/selena.service';
 
 @Module({
   imports: [TypeOrmModule.forFeature([ProjectEntity])],
   controllers: [ProjectController],
   providers: [
     ProjectService,
+    SelenaService,
     {
       provide: APP_INTERCEPTOR,
       useValue: new TranslateInterceptor(

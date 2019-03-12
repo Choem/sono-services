@@ -3,6 +3,7 @@ import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
 import { INestApplication, INestFastifyApplication } from '@nestjs/common';
+import { grpcClientOptions } from './grpc.options';
 
 
 export async function createApp(): Promise<
@@ -13,13 +14,14 @@ export async function createApp(): Promise<
     cors: true,
   });
 
-
+  app.connectMicroservice(grpcClientOptions);
   app.register(require('fastify-multipart'));
   app.register(require('fastify-helmet'));
 
   const options = new DocumentBuilder()
     .setTitle('Sono Project API')
     .setDescription('description...')
+    .setSchemes('https', 'http')
     .setVersion('1.0')
     .build();
 

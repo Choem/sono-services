@@ -1,0 +1,18 @@
+syntax = "proto3";
+package sono;
+
+import "../common/empty.proto";
+import "model/project.proto";
+
+service ProjectService {
+  rpc FindOne (ProjectById) returns (Project) {}
+  rpc FindAll (Empty) returns (Projects) {}
+}
+
+message ProjectById {
+  int32 id = 1;
+}
+
+message Projects {
+  repeated Project projects = 1;
+}
