@@ -2,7 +2,7 @@ syntax = "proto3";
 package sono;
 
 message PaginateParams {
-    string searchTerm = 1
+    string searchTerm = 1;
     int32 pageIndex = 2;
     int32 pageSize = 3;
 }

@@ -1,15 +1,32 @@
 syntax = "proto3";
 package sono;
 
-import "../common/empty.proto";
-import "model/paginate_params.proto";
-import "model/paginate_response.proto";
-import "model/user_email_params.proto";
-import "model/user_id_params.proto";
-import "model/user_response.proto";
-
-service AuthService {
+service AccountService {
     rpc ReadUserById (UserIdParams) returns (UserResponse) {}
     rpc ReadUserByEmail (UserEmailParams) returns (UserResponse) {} 
     rpc Paginate (PaginateParams) returns (PaginateResponse) {}
+}
+
+message UserResponse {
+    int32 id = 1;
+    string username = 2;
+    string email = 3;
+}
+
+message PaginateParams {
+    string searchTerm = 1;
+    int32 pageIndex = 2;
+    int32 pageSize = 3;
+}
+
+message PaginateResponse {
+    repeated UserResponse users = 1;
+}
+
+message UserEmailParams {
+    string email = 1;
+}
+
+message UserIdParams {
+    int32 id = 1;
 }
