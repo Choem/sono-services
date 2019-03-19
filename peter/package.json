@@ -50,7 +50,7 @@
     "@types/jest": "^24.0.6",
     "@types/node": "^11.9.5",
     "@types/supertest": "^2.0.5",
-    "copy-dir-cli": "^0.0.3",
+    "copy-dir-cli": "0.0.3",
     "copyfiles": "^2.1.0",
     "jest": "^24.5.0",
     "nodemon": "^1.18.3",
