@@ -1,0 +1,8 @@
+syntax = "proto3";
+package sono;
+
+import "./user_response.proto";
+
+message PaginateResponse {
+    repeated UserResponse users = 1;
+}
