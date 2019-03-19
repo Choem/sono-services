@@ -11,6 +11,7 @@ import { BaseController } from '../../../../common/baseController';
 import { ProjectCreateDto } from '../../dtos/projectCreateDto';
 import { ApiResponse, ApiOperation, ApiUseTags } from '@nestjs/swagger';
 import { GrpcMethod } from '@nestjs/microservices';
+import { ApiException } from '../../../../common/exceptions/apiException';
 
 @Controller()
 @ApiUseTags('projects')
@@ -61,7 +62,12 @@ export class ProjectController extends BaseController {
   })
   public async find(@Param('id') id) {
     const project = await this.projectService.findById(id);
-    return this.api(true, { data: project });
+
+    if (project === undefined) {
+      throw new ApiException(HttpStatus.NOT_FOUND, 'project.not_found');
+    }
+
+    return this.api(true, { label: 'project.found', data: project });
   }
 
   @GrpcMethod('ProjectService')

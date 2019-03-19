@@ -1,4 +1,6 @@
 {
   "project.create.success": "Project aangemaakt.",
-  "project.alreadyExists": "Project met naam '%s' bestaat al."
+  "project.alreadyExists": "Project met naam '%s' bestaat al.",
+  "project.found": "Project gevonden.",
+  "project.not_found": "Project niet gevonden."
 }

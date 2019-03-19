@@ -1,4 +1,6 @@
 {
   "project.create.success": "Project successfully created.",
-  "project.alreadyExists": "Project with name '%s' already exists."
+  "project.alreadyExists": "Project with name '%s' already exists.",
+  "project.found": "Project found.",
+  "project.not_found": "Project not found."
 }
