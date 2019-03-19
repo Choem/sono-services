@@ -2,7 +2,7 @@ import {
   Body,
   Controller,
   Get,
-  HttpStatus,
+  HttpStatus, Param,
   Post,
   Query,
 } from '@nestjs/common';
@@ -47,6 +47,21 @@ export class ProjectController extends BaseController {
   public async create(@Body() userCreateDto: ProjectCreateDto) {
     await this.projectService.create(userCreateDto);
     return this.api(true, { label: 'project.create.success' });
+  }
+
+  @Get(':id')
+  @ApiOperation({ title: 'Find a Project' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Project has been successfully returned.',
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'Project not found.',
+  })
+  public async find(@Param('id') id) {
+    const project = await this.projectService.findById(id);
+    return this.api(true, { data: project });
   }
 
   @GrpcMethod('ProjectService')

@@ -1,17 +1,14 @@
-import { FastifyAdapter, NestFactory } from '@nestjs/core';
+import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
 
-import { INestApplication, INestFastifyApplication } from '@nestjs/common';
 import { grpcClientOptions } from './grpc.options';
 import { Config } from './utils/config';
+import { FastifyAdapter, NestFastifyApplication } from '@nestjs/platform-fastify';
 
-
-export async function createApp(): Promise<
-  INestApplication & INestFastifyApplication
-> {
+export async function createApp(): Promise<NestFastifyApplication> {
   const fastifyAdapter = new FastifyAdapter({ trustProxy: true });
-  const app = await NestFactory.create(AppModule, fastifyAdapter, {
+  const app = await NestFactory.create<NestFastifyApplication>(AppModule, fastifyAdapter, {
     cors: true,
   });
 

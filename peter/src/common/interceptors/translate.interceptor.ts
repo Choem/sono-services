@@ -1,4 +1,4 @@
-import { ExecutionContext, NestInterceptor } from '@nestjs/common';
+import { CallHandler, ExecutionContext, NestInterceptor } from '@nestjs/common';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { classToPlain } from 'class-transformer';
@@ -36,11 +36,11 @@ export class TranslateInterceptor implements NestInterceptor<any, any> {
 
   intercept(
     context: ExecutionContext,
-    call$: Observable<APIResponse | any>,
+    next: CallHandler<APIResponse | any>,
   ): Observable<APIResponse | any> {
     const url = context.switchToHttp().getRequest().raw.url;
     if (url.startsWith(Reflect.getMetadata(MODULE_PATH, this.module))) {
-      return call$.pipe(
+      return next.handle().pipe(
         map(data => {
           if (
             data instanceof APIResponse &&
@@ -62,6 +62,6 @@ export class TranslateInterceptor implements NestInterceptor<any, any> {
       );
     }
 
-    return call$;
+    return next.handle();
   }
 }
