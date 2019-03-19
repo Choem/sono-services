@@ -31,7 +31,11 @@ export class ProjectService {
     const project = projectCreateDto.toProject();
     project.userId = 0;
     const result = await this.projectRepository.insert(project);
-    await this.selenaService.createDoc(project.id);
+    try {
+      await this.selenaService.createDoc(project.id);
+    } catch (e) {
+      // no implementation needed
+    }
     return result;
   }
 
