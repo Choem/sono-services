@@ -46,8 +46,8 @@ export class ProjectController extends BaseController {
     description: 'Project already exists.',
   })
   public async create(@Body() userCreateDto: ProjectCreateDto) {
-    await this.projectService.create(userCreateDto);
-    return this.api(true, { label: 'project.create.success' });
+    const project = await this.projectService.create(userCreateDto);
+    return this.api(true, { label: 'project.create.success', data: project});
   }
 
   @Get(':id')
