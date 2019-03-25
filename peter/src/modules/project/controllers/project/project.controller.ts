@@ -2,7 +2,7 @@ import {
   Body,
   Controller,
   Get,
-  HttpStatus,
+  HttpStatus, Param,
   Post,
   Query,
 } from '@nestjs/common';
@@ -11,6 +11,7 @@ import { BaseController } from '../../../../common/baseController';
 import { ProjectCreateDto } from '../../dtos/projectCreateDto';
 import { ApiResponse, ApiOperation, ApiUseTags } from '@nestjs/swagger';
 import { GrpcMethod } from '@nestjs/microservices';
+import { ApiException } from '../../../../common/exceptions/apiException';
 
 @Controller()
 @ApiUseTags('projects')
@@ -45,8 +46,28 @@ export class ProjectController extends BaseController {
     description: 'Project already exists.',
   })
   public async create(@Body() userCreateDto: ProjectCreateDto) {
-    await this.projectService.create(userCreateDto);
-    return this.api(true, { label: 'project.create.success' });
+    const project = await this.projectService.create(userCreateDto);
+    return this.api(true, { label: 'project.create.success', data: project});
+  }
+
+  @Get(':id')
+  @ApiOperation({ title: 'Find a Project' })
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Project has been successfully returned.',
+  })
+  @ApiResponse({
+    status: HttpStatus.NOT_FOUND,
+    description: 'Project not found.',
+  })
+  public async find(@Param('id') id) {
+    const project = await this.projectService.findById(id);
+
+    if (project === undefined) {
+      throw new ApiException(HttpStatus.NOT_FOUND, 'project.not_found');
+    }
+
+    return this.api(true, { label: 'project.found', data: project });
   }
 
   @GrpcMethod('ProjectService')

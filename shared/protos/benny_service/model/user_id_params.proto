@@ -1,0 +1,6 @@
+syntax = "proto3";
+package sono;
+
+message UserIdParams {
+    int32 id = 1;
+}
