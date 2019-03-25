@@ -8,8 +8,8 @@ export class DocumentController {
   }
 
   @GrpcMethod('DocumentService')
-  async createDoc(data: { id: number, songdata: string }) {
-    await this.documentService.createDoc(data.id, data.songdata);
+  async createDoc(data: { id: number }) {
+    await this.documentService.createDoc(data.id);
     return { success: true };
   }
 }
