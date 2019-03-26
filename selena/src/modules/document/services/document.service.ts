@@ -19,9 +19,9 @@ export class DocumentService implements OnModuleInit {
 
   createDoc(projectId: number) {
     const doc = this.connection.get('selena', projectId.toString());
-    doc.fetch(res => {
+    doc.fetch(() => {
       if (doc.type == null) {
-        doc.create({});
+        doc.create({data: null});
       }
     });
   }
