@@ -1,6 +1,7 @@
 import { ProjectEntity } from '../../../entities/project.entity';
 import { ApiModelProperty, ApiModelPropertyOptional } from '@nestjs/swagger';
 import {
+  IsOptional,
   IsString,
 } from 'class-validator';
 
@@ -10,6 +11,7 @@ export class ProjectCreateDto {
   readonly name: string;
 
   @IsString()
+  @IsOptional()
   @ApiModelPropertyOptional()
   readonly description?: string;
 
