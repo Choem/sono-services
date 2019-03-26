@@ -9,9 +9,14 @@ export class ProjectCreateDto {
   @ApiModelProperty()
   readonly name: string;
 
+  @IsString()
+  @ApiModelPropertyOptional()
+  readonly description?: string;
+
   toProject(): ProjectEntity {
     const project = new ProjectEntity();
     project.name = this.name;
+    project.description = this.description;
     return project;
   }
 }
