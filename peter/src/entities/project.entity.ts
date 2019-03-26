@@ -16,6 +16,12 @@ export class ProjectEntity {
   @Column({name: 'name'})
   name: string;
 
+  @Column({name: 'description', nullable: true})
+  description?: string;
+
+  @Column({name: 'created_at', default: () => 'CURRENT_TIMESTAMP'})
+  createdAt: Date;
+
   @OneToMany(type => ProjectMemberEntity, member => member.project)
   members: ProjectMemberEntity[];
 
