@@ -1,37 +1,29 @@
-*.swp
-*.*~
-project.lock.json
-.DS_Store
-*.pyc
-nupkg/
+HELP.md
+/target/
+!.mvn/wrapper/maven-wrapper.jar
 
-# Visual Studio Code
-.vscode
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
 
-# Rider
+### IntelliJ IDEA ###
 .idea
+*.iws
+*.iml
+*.ipr
 
-# User-specific files
-*.suo
-*.user
-*.userosscache
-*.sln.docstates
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+/build/
 
-# Build results
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
-x64/
-x86/
-build/
-bld/
-[Bb]in/
-[Oo]bj/
-[Oo]ut/
-msbuild.log
-msbuild.err
-msbuild.wrn
-
-# Visual Studio 2015
-.vs/
+### VS Code ###
+.vscode/
